@@ -36,11 +36,16 @@ project:
     # - title: Simulaties
     #   children:
     #     - file: Content/PySim/...
-    - title: Practica
+    - title: soortelijke warmte
       children:
         - file: Content/Labs/Labtemplate.ipynb
         - file: Content/Labs/cwater.ipynb
         - file: Content/Labs/Warmtecapaciteit.ipynb
+    - title: pV en pT diagrammen
+      children:
+        - file: Content/Labs/druksensorijken.ipynb
+        - file: Content/Labs/pV_diagram.ipynb
+        - file: Content/Labs/pT_diagram.ipynb
 
     
 site:
