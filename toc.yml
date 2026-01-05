@@ -1,10 +1,11 @@
 version: 1
 project:
+  id: 7204695b-7485-4989-863c-16cf6e4db155
   toc:
     - file: index.md
     - file: intro.md
 
-    - title: GitHub 
+    # Github #
     - file: Content/Github/uitleg.md
       children:
         - file: Content/Github/1_intro.md
@@ -31,7 +32,7 @@ project:
             - title: VSC
               url: https://teachbooks.io/learn-programming/workflows/git/vscode
 
-
+    # simulaties #
     - title: Simulaties
       file: Content/PySim/uitleg.md
       children:
@@ -41,22 +42,29 @@ project:
         - file: Content/PySim/4_brownianmotion.ipynb
         - file: Content/PySim/5_druktemp.ipynb
         - file: Content/PySim/6_boltzmann.ipynb
-        # - file: Content/PySim/7_arbeid.ipynb
+        - file: Content/PySim/7_arbeid.ipynb
         # - file: Content/PySim/8_thermostaat.ipynb
         # - file: Content/PySim/9_entropie.ipynb
 
+    # labs #
     - title: Labs
       file: Content/Labs/uitleg.md
       children:
         
-      - title: Soortelijke warmte
-        children:
-          - file: Content/Labs/cwater.ipynb
-          - file: Content/Labs/Verdamping.ipynb        
-          - file: Content/Labs/Warmtecapaciteit.ipynb
-          - file: Content/Labs/koelbuis.ipynb
+        - title: Soortelijke warmte
+          children:
+            - file: Content/Labs/cwater.ipynb             
+            - file: Content/Labs/Warmtecapaciteit.ipynb
+            - file: Content/Labs/koelbuis.ipynb
 
-      # - title: Druk
-      #   children:
-      #     - file: Content/Labs/druksensorijken.ipynb
-      #     - file: Content/Labs/pV_diagram.ipynb
+        - title: Druk
+          children:
+            - file: Content/Labs/druksensorijken.ipynb
+            - file: Content/Labs/ballonproef.ipynb
+            - file: Content/Labs/pV_diagram.ipynb
+
+        - title: Faseovergangen
+          children:
+            - file: Content/Labs/Verdamping.ipynb
+            - file: Content/Labs/cappucino.ipynb
+            - file: Content/Labs/waxine.ipynb

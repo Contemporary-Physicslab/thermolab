@@ -1,7 +1,11 @@
 version: 1
 project:
+  id: 7204695b-7485-4989-863c-16cf6e4db155
 
   plugins:
   - https://github.com/jupyter-book/myst-plugins/releases/download/Admonitions/experiment-admonition.mjs
   - https://github.com/jupyter-book/myst-plugins/releases/download/exercise-and-solution-pdf/exercise-admonition-pdf.mjs
   - https://github.com/jupyter-book/myst-plugins/releases/download/iframe-to-qr-pdf/iframe-to-qr-pdf.mjs
+  - https://github.com/jupyter-book/myst-plugins/releases/download/updated-date-frontmatter/update-date-frontmatter.mjs
+  - autoupdater.mjs
+  

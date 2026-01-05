@@ -1,3 +1,7 @@
+--- 
+authors: Freek Pols
+updated: december 3, 2025    
+---
 # Markdown (Cheatsheet)
 
 Dit portfolio wordt gemaakt op basis van MarkDown files en Jupyter Notebook files. Jupyter Notebooks combineren python code cellen met tekst cellen die in markdown geschreven zijn. Markdown is een eenvoudige opmaaktaal: platte tekst die *opgemaakt* wordt met kleine stukjes 'code'. Die tekst is vervolgens snel te exporteren naar allerlei andere formats zoals pdf, word, html etc.

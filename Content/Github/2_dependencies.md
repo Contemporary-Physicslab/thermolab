@@ -2,6 +2,8 @@
 downloads:
   - file: ./requirements.txt
     title: Software dependencies
+authors: Freek Pols
+updated: december 3, 2025
 --- 
 
 # Installeren extra software
