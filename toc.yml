@@ -11,27 +11,7 @@ project:
         - file: Content/Github/1_intro.md
         - file: Content/Github/2_dependencies.md
         - file: Content/Github/3_features.md
-        - title: GitHub documentation
-          children:
-            - title: Motivation for Using GitHub
-              url: https://book.the-turing-way.org/collaboration/github-novice/github-novice-motivation
-            - title: Version control
-              url: https://teachbooks.io/learn-programming/version_control/version_control
-            - title: Intro to Git
-              url: https://teachbooks.io/learn-programming/workflows/git/intro
-            - title: first steps
-              url: https://book.the-turing-way.org/collaboration/github-novice/github-novice-firststeps
-            - title: GitHub
-              url: https://teachbooks.io/learn-programming/workflows/git/github
-            - title: Commits remote
-              url: https://teachbooks.io/learn-programming/workflows/git/commits_remote
-            - title: Commits local
-              url: https://teachbooks.io/learn-programming/workflows/git/commits_local
-            - title: Cloning
-              url: https://teachbooks.io/learn-programming/workflows/git/cloning
-            - title: VSC
-              url: https://teachbooks.io/learn-programming/workflows/git/vscode
-
+        
     # simulaties #
     - title: Simulaties
       file: Content/PySim/uitleg.md

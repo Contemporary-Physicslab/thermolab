@@ -1,9 +1,0 @@
-numpy
-matplotlib
-scipy
-jupyter
-jupyterlab
-jupyter-book
-jupyterlab_myst
-ipykernel
-ipywidgets

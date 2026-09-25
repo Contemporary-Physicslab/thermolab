@@ -1,4 +1,6 @@
 _build
 *.pdf
 .ipynb_checkpoints/
-hidden
+hidden# pixi environments
+.pixi/*
+!.pixi/config.toml
