@@ -8,12 +8,15 @@ version = "0.1.0"
 [tasks]
 editor = "jupyter lab"
 preview = "myst start"
+push = { cmd = 'git add . && git commit -m "{{ message }}" && git push', args = ["message"] }
+pull = 'git pull'
+
 
 [dependencies]
 numpy = ">=2.5.3,<3"
 matplotlib = ">=3.11.2,<4"
 scipy = ">=1.18.1,<2"
-jupytext = ">=1.19.5,<2"
+
 
 [feature.development.pypi-dependencies]
 jupyterlab-myst = ">=2.7.0, <3"
@@ -21,6 +24,7 @@ jupyterlab-myst = ">=2.7.0, <3"
 [feature.development.dependencies]
 mystmd = ">=1.10.1,<2"
 jupyterlab = ">=4.6.4,<5"
+jupytext = ">=1.19.5,<2"
 
 [environments]
 ci = []

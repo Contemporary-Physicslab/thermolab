@@ -1,7 +1,0 @@
-version: 1
-project:
-  id: 7204695b-7485-4989-863c-16cf6e4db155
-
-  plugins:
-  - https://github.com/jupyter-book/myst-plugins/releases/download/updated-date-frontmatter/update-date-frontmatter.mjs
-  
