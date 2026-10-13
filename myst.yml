@@ -1,0 +1,24 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: d4ed63d4-e4ba-4d57-b9c3-8f8af2dac267
+  title: Python Thermodynamica Simulaties voor TN13015
+  # description:
+  # keywords: []
+  authors: 
+    - name: Freek Pols
+    - name: Roel Smit
+
+  github: https://github.com/Contemporary-Physicslab/py_thermo_sim_dev
+
+  toc:
+    - file: index.md
+    - file: simulations/repostart.md
+    - file: simulations/intro.md
+    - file: simulations/NB1_deeltjesmodel.md
+    - title: Appendix
+      children:
+      - file: codechecks.md
+
+extends:
+  - https://gitlab.tudelft.nl/oicm/assets/-/raw/main/style.yml?ref_type=heads
