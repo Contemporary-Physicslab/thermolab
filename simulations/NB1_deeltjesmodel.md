@@ -229,7 +229,8 @@ En als je wilt gaan voor een uitdaging:
 ```
 
 ```python
-# your code here```
+# your code here
+```
 
 Onze simulaties worden snel “zwaar”. Er moeten veel berekeningen gedaan worden en dat kost nu eenmaal tijd. Nu is het wel zo dat sommige berekeningen meer tijd kosten dan anderen. Om te kijken of een stukje code geoptimaliseerd kan worden, moeten we een timer maken. Dat kan met onderstaande code:
 
@@ -431,7 +432,8 @@ Controleer je eigen antwoord door de functie hierboven even te vervangen door de
 def update(frame):
     particle.update_position()
     dot.set_data([particle.r[0]], [particle.r[1]])
-# your code here    return dot,         
+# your code here
+    return dot,         
 ```
 
 ```{exercise} Harde wanden
@@ -446,7 +448,8 @@ Test wederom je code door de vernieuwde functie hierboven te plakken.
 def update(frame):
     particle.update_position()
     dot.set_data([particle.r[0]], [particle.r[1]])
-# your code here    return dot,
+# your code here
+    return dot,
 ```
 
 ```{exercise}
@@ -461,6 +464,7 @@ dt = 0.1         # time step
 num_steps = 500  # number of time steps
 
 # your code here
+
 # Create the figure and axis
 fig, ax = plt.subplots()
 ax.set_xlim(-10, 10)
@@ -482,7 +486,8 @@ def init():
 def update(frame):
     particle.update_position()
     dot.set_data([particle.r[0]], [particle.r[1]])
-    # your code here    return dot,
+    # your code here
+    return dot,
 
 # Create animation
 ani = FuncAnimation(fig, update, frames=range(200), init_func=init, blit=True, interval=50)
@@ -528,7 +533,8 @@ class ParticleClass:
 dt = 0.1         # time step
 num_steps = 500  # number of time steps
 particle = ParticleClass(m=1.0, v=[5.0, 0], r=[0.0, 0.0],R=1.0)  
-# your code here# Create the figure and axis
+# your code here
+# Create the figure and axis
 fig, ax = plt.subplots()
 ax.set_xlim(-10, 10)
 ax.set_ylim(-10, 10)
@@ -551,7 +557,8 @@ def update(frame):
     particle.update_position()
     
     dot.set_data([particle.r[0]], [particle.r[1]])
-    # your code here    return dot,
+    # your code here
+    return dot,
 
 # Create animation
 ani = FuncAnimation(fig, update, frames=range(200), init_func=init, blit=True, interval=50)
@@ -658,6 +665,7 @@ dt = 0.1         # time step
 num_steps = 500  # number of time steps
 particleA = ParticleClass(m=1.0, v=[0, 0], r=[0.0, 0.0],R=1.0)  
 # your code here
+
 track_x = []
 track_y = []
 
@@ -686,6 +694,7 @@ def update(frame):
     particleA.update_velocity(a)
 
 # your code here
+
     track_x.append(particleA.r[0])
     track_y.append(particleA.r[1])
     track_line.set_data(track_x, track_y)
@@ -748,7 +757,8 @@ class ParticleClass:
         self.r += self.v * dt  
 
     def collide_detection(self, other):
-        # your code here        return  dx**2+dy**2 < rr**2 
+        # your code here
+        return  dx**2+dy**2 < rr**2 
 ```
 
 ```python
@@ -800,6 +810,7 @@ def update(frame):
     # botsing tussen de deeltjes onderling
     if particleA.collide_detection(particleB):
         # your code here
+
 
     # botsing met de wand
     if particleA.r[0]**2>100: 
@@ -954,18 +965,23 @@ def update(frame):
         particleB.v = vB_new
         # your code here
 
+
     # wall collision detection and response
     if particleA.r[0]**2>100: # Check if particle is outside the bounds, np.abs could be used but is slower
         particleA.v[0] = -particleA.v[0]
-        # your code here    if particleA.r[1]**2>100: 
+        # your code here
+    if particleA.r[1]**2>100: 
         particleA.v[1] = -particleA.v[1]
         # your code here
+
     dot.set_data([particleB.r[0]], [particleB.r[1]])
     if particleB.r[0]**2>100: 
         particleB.v[0] = -particleB.v[0]
-        # your code here    if particleB.r[1]**2>100: 
+        # your code here
+    if particleB.r[1]**2>100: 
         particleB.v[1] = -particleB.v[1]
         # your code here
+
     return dot, counter_text
 
 # Create animation
@@ -981,6 +997,7 @@ Pas de bovenstaande code aan zodat $m_1 = 1$ en $m_2 = 100$. Run de code en geef
 
 ```python tags=["NB1_eindantwoord"]
 
-# your code here```
+# your code here
+```
 
 Klaar? Bekijk de twee versies, kies de beste en doe een `Pull Request` naar `Main`. Je partner reviewt de code, doet eventueel suggesties. Je partner is ook degene die uiteindelijke  de Pull Request goed keurt.
