@@ -28,4 +28,4 @@ jupytext = ">=1.19.5,<2"
 
 [environments]
 ci = []
-development = ["development"]
+default = { features = ["development"] }
