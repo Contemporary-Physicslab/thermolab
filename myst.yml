@@ -10,7 +10,8 @@ project:
     - name: Roel Smit
 
   github: https://github.com/Contemporary-Physicslab/py_thermo_sim_dev
-
+  plugins:
+    - https://github.com/jupyter-book/myst-plugins/releases/download/page-last-updatedv1.1/page-last-updated.mjs
   toc:
     - file: index.md
     - file: simulations/repostart.md
