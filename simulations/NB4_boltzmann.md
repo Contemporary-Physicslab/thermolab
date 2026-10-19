@@ -360,27 +360,7 @@ for i in range(5000):
 norm_counts = tot_counts / 20
 
 def maxwell2d(v,a):
-###begin-solution
-    return a*v*np.exp(-a*v**2/2)
-
-
-#let op: histogram lijkt niet de centrale waarde van de bin te geven.
-bin_centers = 0.5 * (bins[:-1] + bins[1:])
-
-# Vinden van de optimale paramters
-popt, pcov = curve_fit(maxwell2d, bin_centers, norm_counts)
-
-x_fit = np.linspace(0, 3*V_0,100)
-y_fit = maxwell2d(x_fit, *popt)
-
-plt.stairs(norm_counts, bins, fill='True', label='data')
-plt.plot(x_fit, y_fit, 'r-', label='fit')
-
-plt.legend()
-plt.show()
-
-print(1.0/(2*popt[0]) * 30 * 1.7E-27 * (1E-9 / 2.5E-12)**2 / 1.38E-23)
-###begin-solution
+# your code here
 ```
 
 ```{exercise}

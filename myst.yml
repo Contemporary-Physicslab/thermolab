@@ -17,6 +17,9 @@ project:
     - file: simulations/repostart.md
     - file: simulations/intro.md
     - file: simulations/NB1_deeltjesmodel.md
+    - file: simulations/NB2_brownianmotion.md
+    - file: simulations/NB3_druktemp.md
+    - file: simulations/NB4_boltzmann.md
     - title: Appendix
       children:
       - file: codechecks.md
