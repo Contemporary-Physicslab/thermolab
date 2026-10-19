@@ -1,4 +1,4 @@
-# Notebook 1: Deeltjesmodel
+# NB 1: Deeltjesmodel
 
 
 Computer simulaties zijn een belangrijk onderdeel bij natuurkundig onderzoek: wat we niet in het lab kunnen doen, of waar we niet goed aan kunnen meten, kunnen we alsnog bestuderen dankzij simulaties. In deze module leggen we de basis voor natuurkundige computer simulaties en maken we de eerste stappen in ons deeltjes model.
@@ -229,7 +229,7 @@ En als je wilt gaan voor een uitdaging:
 ```
 
 ```python
-# your code here
+### YOUR CODE HERE ###
 ```
 
 Onze simulaties worden snel “zwaar”. Er moeten veel berekeningen gedaan worden en dat kost nu eenmaal tijd. Nu is het wel zo dat sommige berekeningen meer tijd kosten dan anderen. Om te kijken of een stukje code geoptimaliseerd kan worden, moeten we een timer maken. Dat kan met onderstaande code:
@@ -432,7 +432,7 @@ Controleer je eigen antwoord door de functie hierboven even te vervangen door de
 def update(frame):
     particle.update_position()
     dot.set_data([particle.r[0]], [particle.r[1]])
-# your code here
+### YOUR CODE HERE ###
     return dot,         
 ```
 
@@ -448,7 +448,7 @@ Test wederom je code door de vernieuwde functie hierboven te plakken.
 def update(frame):
     particle.update_position()
     dot.set_data([particle.r[0]], [particle.r[1]])
-# your code here
+### YOUR CODE HERE ###
     return dot,
 ```
 
@@ -463,7 +463,7 @@ Verander nu de code zodanig dat de beginsnelheid gegeven wordt door $\vec{v}=5\h
 dt = 0.1         # time step
 num_steps = 500  # number of time steps
 
-# your code here
+### YOUR CODE HERE ###
 
 # Create the figure and axis
 fig, ax = plt.subplots()
@@ -486,7 +486,7 @@ def init():
 def update(frame):
     particle.update_position()
     dot.set_data([particle.r[0]], [particle.r[1]])
-    # your code here
+    ### YOUR CODE HERE ###
     return dot,
 
 # Create animation
@@ -533,7 +533,7 @@ class ParticleClass:
 dt = 0.1         # time step
 num_steps = 500  # number of time steps
 particle = ParticleClass(m=1.0, v=[5.0, 0], r=[0.0, 0.0],R=1.0)  
-# your code here
+### YOUR CODE HERE ###
 # Create the figure and axis
 fig, ax = plt.subplots()
 ax.set_xlim(-10, 10)
@@ -557,7 +557,7 @@ def update(frame):
     particle.update_position()
     
     dot.set_data([particle.r[0]], [particle.r[1]])
-    # your code here
+    ### YOUR CODE HERE ###
     return dot,
 
 # Create animation
@@ -664,7 +664,7 @@ Maak de code hieronder voor twee deeltjes die bewegen in een afgesloten doos. Be
 dt = 0.1         # time step
 num_steps = 500  # number of time steps
 particleA = ParticleClass(m=1.0, v=[0, 0], r=[0.0, 0.0],R=1.0)  
-# your code here
+### YOUR CODE HERE ###
 
 track_x = []
 track_y = []
@@ -693,7 +693,7 @@ def update(frame):
     particleA.update_position()
     particleA.update_velocity(a)
 
-# your code here
+### YOUR CODE HERE ###
 
     track_x.append(particleA.r[0])
     track_y.append(particleA.r[1])
@@ -757,7 +757,7 @@ class ParticleClass:
         self.r += self.v * dt  
 
     def collide_detection(self, other):
-        # your code here
+        ### YOUR CODE HERE ###
         return  dx**2+dy**2 < rr**2 
 ```
 
@@ -809,7 +809,7 @@ def update(frame):
 
     # botsing tussen de deeltjes onderling
     if particleA.collide_detection(particleB):
-        # your code here
+        ### YOUR CODE HERE ###
 
 
     # botsing met de wand
@@ -963,24 +963,23 @@ def update(frame):
         vB_new = vB - 2 * mA / (mA + mB) * np.dot(vB - vA, rB - rA) / (1e-12+np.linalg.norm(rB - rA))**2 * (rB - rA)
         particleA.v = vA_new
         particleB.v = vB_new
-        # your code here
+        ### YOUR CODE HERE ###
 
 
     # wall collision detection and response
     if particleA.r[0]**2>100: # Check if particle is outside the bounds, np.abs could be used but is slower
         particleA.v[0] = -particleA.v[0]
-        # your code here
+        ### YOUR CODE HERE ###
     if particleA.r[1]**2>100: 
         particleA.v[1] = -particleA.v[1]
-        # your code here
+        ### YOUR CODE HERE ###
 
     dot.set_data([particleB.r[0]], [particleB.r[1]])
     if particleB.r[0]**2>100: 
         particleB.v[0] = -particleB.v[0]
-        # your code here
+
     if particleB.r[1]**2>100: 
         particleB.v[1] = -particleB.v[1]
-        # your code here
 
     return dot, counter_text
 
@@ -992,12 +991,16 @@ from IPython.display import HTML
 HTML(ani.to_jshtml())
 ```
 
-Pas de bovenstaande code aan zodat $m_1 = 1$ en $m_2 = 100$. Run de code en geef hieronder als integer aan hoeveel botsingen totaal hebben plaats gevonden.
+```{exercise}
+Pas de bovenstaande code aan zodat $m_1 = 1$ en $m_2 = 50$. Run de code en geef hieronder als integer aan hoeveel botsingen totaal hebben plaats gevonden. Let op! Het kan zijn dat je voor het precies antwoord nog wat dingen moet aanpassen...
+```
 
 
 ```python tags=["NB1_eindantwoord"]
-
-# your code here
+num_botsingen =
+### YOUR CODE HERE ###
 ```
 
+```{exercise}
 Klaar? Bekijk de twee versies, kies de beste en doe een `Pull Request` naar `Main`. Je partner reviewt de code, doet eventueel suggesties. Je partner is ook degene die uiteindelijke  de Pull Request goed keurt.
+```
