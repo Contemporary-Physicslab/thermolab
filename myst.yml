@@ -25,4 +25,4 @@ project:
       - file: codechecks.md
 
 extends:
-  - https://raw.githubusercontent.com/Contemporary-Physicslab/assets/d51505493b743eee8c31f84f690624b81c82f5fa/style.yml
+  - https://raw.githubusercontent.com/Contemporary-Physicslab/assets/refs/heads/main/style.yml

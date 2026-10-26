@@ -378,7 +378,7 @@ In onderstaande figuur is dat weergegeven.
 Het lichtrode deeltje heeft potentieel maar negen mogelijke botsingen. 
 Dat script kan verder geoptimaliseerd worden door van links naar rechts per grid te lopen, dan hoeven zelfs niet alle velden bekeken te worden.
 
-```{figure} ../../Figures/grid.png
+```{figure} ../figures/grid.png
 :width: 50%
 ```
 
