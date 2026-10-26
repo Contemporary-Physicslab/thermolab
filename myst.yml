@@ -25,4 +25,4 @@ project:
       - file: codechecks.md
 
 extends:
-  - https://gitlab.tudelft.nl/oicm/assets/-/raw/main/style.yml?ref_type=heads
+  - https://github.com/Contemporary-Physicslab/assets/-/raw/main/style.yml?ref_type=heads
