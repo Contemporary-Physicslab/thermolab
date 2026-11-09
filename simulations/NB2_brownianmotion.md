@@ -39,9 +39,7 @@ Hieronder geven we een aantal constanten voor onze code. Om de simulatie straks 
 ```{exercise} Lucht in een fietsband
 :label: ex-recap-1
 
-Als model gaan we uit van een deel van het volume van een fietsband die onder een druk van 10 bar staat.
-Laat zien dat het gemiddelde volume $V_{molecuul}$ ongeveer $1.6 \; \mathrm{nm} is.
-Het antwoord gebruik je zo direct in de code hieronder. 
+Als model gaan we uit van een deel van het volume van een fietsband die onder een druk van 10 bar staat. Laat zien dat het gemiddelde volume $V_{molecuul}$ ongeveer overeenkomt met een kubus met ribben van $1.6 \; \mathrm{nm}$ is. Het antwoord gebruik je zo direct in de code hieronder. 
 ```
 
 ```{solution} ex-recap-1
@@ -70,7 +68,7 @@ Ook deze heb je hierna nodig.
 
 ```{exercise} Radius
 :label: ex-recap-3
-Kies de eenheden waarin je de simulatie wilt gaan uitwerken. Dit kan in $\mathrm{m}$ maar ook in $\mathrm{mm}$ of iets anders. Pas de waardes voor de constanten `BOX_SIZE_0` en `V_0` in de hieronder gegeven code aan, zodat de simulatie een redelijk tweedimensionaal model is voor de fietsband. Hou hierbij het aantal deeltjes $N=40$ om de rekentijd van het model te beperken. Kies `RADIUS` gelijk aan 0.3 nm gebruik makend van jouw eenhedenstelsel.
+In de python cell hieronder staan enkele waarden gegeven. Het aantal deeltjes $N=40$ is beperkt, dit om de rekentijd van het model te beperken. 
 ```
 
 ```{solution} ex-recap-3
@@ -79,20 +77,17 @@ Kies de eenheden waarin je de simulatie wilt gaan uitwerken. Dit kan in $\mathrm
 
 ```{exercise} DT
 :label: ex-recap-4
-Pas waarde van `DT` aan zodat de verplaatsing van een deeltje in een tijdstap klein genoeg is om te detecteren of deze met een ander deeltje botst. Zet in het groene commentaar bij elke constante in welk eenheid deze wordt weergegeven.
+Bekijk de waarde van `DT`. Hoe zorgt deze waaarde ervoor dat het onwaarschijnlijk is dat een botsing gemist wordt? Zet in het groene commentaar bij elke constante in welk eenheid deze wordt weergegeven.
 ```
 
 Onze simulatie modelleert dus een klein systeem zonder rekening te houden met de kracht tussen de luchtmoleculen. Je zult zien dat we toch al behoorlijk wat van de processor vragen om deze berekeningen te doen. Om een meer realistische modelsimulatie te maken is daarom een serieuze uitdaging, die veel wiskunde en programmeerervaring vraagt. Op dit ogenblik wordt dit bijvoorbeeld gevraagd bij een van de eerste opdrachten van het vak 'Computational Physics' van de master Applied Physics. 
 
-```python
-# Ruimte voor uitwerking
-BOX_SIZE_0 = 0                  # Hoogte en breedte startvolume (in vul je gekozen eenheid in)
-N = 40                          # Aantal deeltjes 
-V_0 = 0                         # Startsnelheid van deeltjes (vul je gekozen eenheid in)
-RADIUS = 0                      # Straal van moleculen (vul je gekozen eenheid in)
-DT = 0                          # Tijdstap om geen botsing te missen (vul je gekozen eenheid in)
-
-### YOUR CODE HERE ###
+```python tags=["NB2_init"] editable=true slideshow={"slide_type": ""}
+BOX_SIZE_0 = 10                # Hoogte en lengte startvolume
+N = 40                         # Aantal deeltjes
+V_0 = 1                        # Startsnelheid van deeltjes
+RADIUS = 0.3                   # Straal van moleculen
+DT = 0.1 * RADIUS / V_0        # Tijdstap om geen botsing te missen
 ```
 
 ### Particle class
@@ -102,7 +97,7 @@ Nieuw aan `ParticleClass` zijn twee properties, nl. `momentum` en `kin_energy`. 
 
 Buiten `ParticleClass` voegen we twee functies toe, die je ook al hebt gezien. De eerste heet `collide_detection` en detecteert of twee deeltjes onderling overlappen en dus botsen. De tweede heet `particle_collision` en berekent de nieuwe snelheden van de twee deeltjes ten gevolge van hun botsing.
 
-```python
+```python editable=true slideshow={"slide_type": ""} tags=["NB2_init"]
 # Maken van de class
 class ParticleClass:
     def __init__(self, m, v, r, R):
@@ -125,7 +120,6 @@ class ParticleClass:
         return 1/2 * self.m * np.dot(self.v, self.v)
     
 def collide_detection(p1: ParticleClass, p2: ParticleClass) -> bool:
-    """ Geeft TRUE als de deeltjes overlappen """
     """ Geeft TRUE als de deeltjes overlappen """
     dx = p1.r[0]-p2.r[0]
     dy = p1.r[1]-p2.r[1]
@@ -158,7 +152,7 @@ Je hebt hiervoor al een voorbeeld van gezien, maar hieronder gebruiken we een an
 
 We maken gebruik van een truc die in veel simulaties wordt gebruikt: we maken gebruik van periodieke randvoorwaarden. In dit geval wil dit zeggen dat een deeltje dat botst met de wand aan de ene kant van het volume, aan de andere kant verschijnt met exact dezelfde snelheid. Op deze manier verandert de snelheid van een deeltje niet bij het botsen met de wand en blijven alle behoudswetten gelden. Die behoudswetten kunnen we straks goed controleren.
 
-```python
+```python editable=true slideshow={"slide_type": ""} tags=["NB2_init"]
 def box_collision(particle: ParticleClass):
     ''' botsing met wanden geeft periodieke randvoorwaarden '''
     for i in range(2):
@@ -188,7 +182,7 @@ Jouw antwoord hier...
 ### YOUR CODE HERE ###
 ```
 
-```python
+```python tags=["NB2_init"] editable=true slideshow={"slide_type": ""}
 def create_particles(particles):
     ''' Leegmaken en opnieuw aanmaken van deeltjes '''
     particles.clear
@@ -214,7 +208,7 @@ Jouw antwoord hier...
 ### YOUR CODE HERE ###
 ```
 
-```python
+```python editable=true slideshow={"slide_type": ""} tags=["NB2_init"]
 def handle_collisions(particles):
     """ alle onderlinge botsingen afhandelen voor deeltjes in lijst """
     num_particles = len(particles)
@@ -228,7 +222,7 @@ def handle_collisions(particles):
 
 Voor het bepalen of deeltjes botsen met de wanden maken we gebruik van de functie die we net hebben aangepast.
 
-```python
+```python editable=true slideshow={"slide_type": ""} tags=["NB2_init"]
 def handle_walls(particles):
     ''' botsing met wanden controleren voor alle deeltjes in volume '''
     for p in particles:
@@ -239,7 +233,7 @@ def handle_walls(particles):
 
 Nu moeten we alle functies op de juiste manier combineren om de simulatie een tijdstap te laten maken:
 
-```python
+```python editable=true slideshow={"slide_type": ""} tags=["NB2_init"]
 def take_time_step(particles):
     for p in particles:
         p.update_position()
@@ -311,7 +305,7 @@ Om te controleren of onze code werkt passen we nu de code aan.
 Voeg aan de simulatie een regel toe die voor elke tijdstap bepaalt wat de totale kinetische energie is voor alle deeltjes en neem deze waarde op in een array die bij elke tijdstap met één element groeit in lengte. Maak vervolgens een plot van de totale kinetische energie als functie van de tijd gedurende een simulatie van 100 tijdstappen.
 ```
 
-```python
+```python tags=["NB2_ex7"]
 # plotten van kinetische energie als functie van tijd
 
 particles = []
@@ -454,7 +448,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-```python
+```python tags=["NB2_init"]
 # Maken van de ParticleClass
 
 class ParticleClass:
@@ -488,7 +482,7 @@ class ParticleClass:
         return 1/2 * self.m * np.dot(self.v, self.v)
 ```
 
-```python
+```python tags=["NB2_init"]
 # Aanmaken van de randvoorwaarden en initiele condities
 Box_size_0 = 10
 Box_length_0 = Box_size_0/2
@@ -612,12 +606,10 @@ track_y = []
 
 ### YOUR CODE HERE ###
 
-### YOUR CODE HERE ###
-
 for i in range(400):
     ### YOUR CODE HERE ###
     
-    for p in particles:
+    for p in particles:        
         p.update_position()    # Update positie        
         p.boxcollision()         # Wandbotsing werkt per deeltje
         
@@ -724,7 +716,7 @@ ani.save("deeltjes.gif", writer="pillow", fps=20)
 
 ```{exercise} Brownian motion in beeld
 :label: ex-brownian-3
-- Draai de onderstaande simulatie een keer en bestudeer de output.
+- Draai de simulatie een keer en bestudeer de output.
 - Voeg zelf een tweede tracking toe van een licht deeltje en verbeter de plot.
 - Wat zijn overeenkomsten en verschillen tussen de beweging van de twee deeltjes?
 - Wat valt je op als je de simulatie een aantal keer runt?
@@ -770,7 +762,7 @@ Maar voor een histogram hebben we veel deeltjes nodig.
 ```
 
 
-```python
+```python tags=["NB2_brownian_distance_histogram"] editable=true slideshow={"slide_type": ""}
 ### YOUR CODE HERE ###
 
 ```

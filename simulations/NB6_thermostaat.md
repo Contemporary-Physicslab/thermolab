@@ -1,14 +1,13 @@
 # NB 6: Thermostaat
 
 In het vorige werkblad heb je gezien hoe een gas zich gedraagt in een zuiger waarbinnen wordt voldaan aan de wet van behoud van energie.
-In dat geval geldt $p \propto \alpha V^{-k}$, waarbij $k$ een exponent is die wordt bepaald door de vrijheidsgraden van het gas - in onze simulatie werken we met mono-atomaire gassen in 2D. 
+In dat geval geldt $p \propto \alpha V^{-k}$, waarbij $k$ een exponent is die wordt bepaald door de vrijheidsgraden van het gas - in onze simulatie simuleren we mono-atomaire gassen in 2D. 
 
 We hadden kunnen denken dat we de ideale gaswet zouden kunnen gebruiken.
 Echter, de temperatuur van het gas verandert door de werking van de zuiger - deze verricht arbeid. 
 
-Het meenemen van arbeid dat verricht wordt door, of op, het gas is een eerste uitbreiding die belangrijk is in Thermodynamica.
-Uitwisseling van energie (toevoegen of afvoeren van warmte) is een tweede uitbreiding.
-In deze simulatie onderzoeken we die uitbreiding waarbij we warmte aan en af voeren uit het controlevolume.
+Arbeid uitgevoerd door (of op) het gas is een belangrijke interactie van het systeem met de omgeving. Uitwisseling van energie (toevoegen of afvoeren van warmte) is een tweede uitbreiding.
+In deze simulatie onderzoeken we die uitbreiding waarbij we warmte aan- en afvoeren uit het controlevolume.
 Op die manier kunnen we ook isotherme simulaties doen.
 
 Eerst herhalen we de nodige ingrediënten:
@@ -26,35 +25,33 @@ En vervolgens
 
 ## Laden van eerdere code
 
-De pakketten van Python en de constanten voor de simulatie:
+De pakketten van Python en de constanten voor de simulatie. Hierbij is de snelheid van de zuiger verder verlaagd.
 
-```{exercise} constanten
-:label: ex-thermostat-01
-Neem de constanten die je in het vorige werkblad hebt gekozen hieronder over.
-```
+% ```{exercise} constanten
+% :label: ex-thermostat-01
+% Neem de constanten die je in het vorige werkblad hebt gekozen hieronder over.
+% ```
 
 
-```python
+```python tags=["NB6_1"]
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from scipy.optimize import curve_fit
 
-BOX_SIZE_0 = 0               # Hoogte en lengte startvolume
+BOX_SIZE_0 = 10              # Hoogte en lengte startvolume in nm
 N = 40                       # Aantal deeltjes
-V_0 = 0                      # Startsnelheid van deeltjes
-RADIUS = 0                   # Straal van moleculen
-DT = 0                       # Tijdstap om geen botsing te missen
-V_PISTON_0 = -0.1 * V_0      # Startsnelheid van zuiger 
-k_B = 1.38E-23
+V_0 = 0.4                    # Startsnelheid van deeltjes in nm per ps
+RADIUS = 0.3                 # Straal van moleculen in nm
+DT = 0.1 * RADIUS / V_0      # Tijdstap in ps (kort om geen botsing te missen)
+V_PISTON_0 = -0.02 * V_0      # Startsnelheid van zuiger 
 # (negatief betekent zowel links als rechts naar binnen gericht)
-
-### YOUR CODE HERE ###
+k_B = 1.38E-23
 ```
 
 De klasse voor het gasmolecuul met de interacties:
 
-```python
+```python tags=["NB6_2"]
 class ParticleClass:
     def __init__(self, m, v, r, R):
         """ maakt een deeltje (constructor) """
@@ -95,9 +92,14 @@ def particle_collision(p1: ParticleClass, p2: ParticleClass):
     p2.v += 2 * m1 / (m1 + m2) * dot_product / distance_squared * delta_r
 ```
 
-Voor de randvoorwaarde van het volume is rekening gehouden met een bewegende zuiger, zoals in het vorige werkblad is toegevoegd:
+Voor de botsingen met de wanden moeten we nu de functies gebruiken zoals je die in notebook 5 hebt ontwikkeld.
 
-```python
+```{exercise} functies
+:label: ex-thermostat-01
+Neem de functie die je in het vorige werkblad hebt geprogrammeerd voor `left_right_colission`over in onderstaande code:
+```
+
+```python tags=["NB6_3"]
 def top_down_collision(particle: ParticleClass):
     global impulse_outward, box_height
     if abs(particle.r[1]) + particle.R > box_height / 2:
@@ -108,38 +110,12 @@ def top_down_collision(particle: ParticleClass):
 def left_right_collision(particle: ParticleClass):
     """ verzorgen van botsingen met wand links en rechts, die als zuiger kunnen bewegen """
     global box_length, v_piston, impulse_outward, work
-    if abs(particle.r[0]) + particle.R > box_length / 2:
-        particle.r[0] = np.sign(particle.r[0]) * (box_length/2 - particle.R)
-        piston_velocity = np.sign(particle.r[0]) * v_piston
-        relative_velocity = particle.v[0] - piston_velocity  # stelsel zuiger
-        particle.v[0] = -relative_velocity + piston_velocity # stelsel waarnemer
-        impulse_outward += 2 * particle.m * abs(relative_velocity)
-        work += 2 * particle.m * relative_velocity * piston_velocity
-```
-
-De functies voor het uitvoeren van de functies over de gehele lijst met deeltjes, waarbij we de werking van de zuiger ook hebben meegenomen:
-
-```{exercise} temperatuur
-:label: ex-thermostat-02
-Pas de code voor de functie `temperature` aan naar de functie die je op de vorige werkbladen hebt gebruikt.
-```
-
-```python
-def create_particles(particles):
-    """ Leegmaken en opnieuw aanmaken van deeltjes  in lijst """
-    global box_length, box_height
-    particles.clear()
-    for _ in range(N):
-        vx = np.random.uniform(-V_0, V_0)
-        vy = np.random.choice([-1, 1]) * np.sqrt(V_0**2 - vx**2)        
-        x = np.random.uniform(-box_length/2 + RADIUS, box_length/2 - RADIUS)
-        y = np.random.uniform(-box_height/2 + RADIUS, box_height/2 - RADIUS)
-        particles.append(ParticleClass(m=1.0, v=[vx, vy], r=[x, y], R=RADIUS))
-    
-def temperature(particles) -> float:
-    temp = 0.0
-
-    ### YOUR CODE HERE ###
+    if particle.r[0] > box_length/2 - particle.R:
+        # kopieer de correcte code van de functie zoals je die in het vorige werkblad hebt opgesteld
+        ### YOUR CODE HERE ###
+    elif particle.r[0] < -box_length/2 + particle.R:
+        # kopieer de correcte code van de functie zoals je die in het vorige werkblad hebt opgesteld
+        ### YOUR CODE HERE ###
 
     return temp
         
@@ -175,11 +151,12 @@ def take_time_step(particles):
 
 Voordat we de code aanpassen controleren we eerst of alles het doet. Hiervoor maken we zowel een $P,V$-diagram als een $T,V$-diagram (met als toevoeging een $P,T$-diagram) tijdens de werking van de zuiger. Let op! De eenheden van deze grafiek kunnen niet kloppen omdat er niet in verrekend zit welke constanten jij hebt gekozen. 
 
-```python
+```python tags=["NB6_4"]
+stepcount = 4000
 particles = []
-volumes = np.zeros(1000, dtype=float)
-pressures = np.zeros(1000, dtype=float)
-temperatures = np.zeros(1000, dtype=float)
+volumes = np.zeros(stepcount, dtype=float)
+pressures = np.zeros(stepcount, dtype=float)
+temperatures = np.zeros(stepcount, dtype=float)
 # times = np.linspace(1, 100, 100)
 
 pressure = 0.0
@@ -188,10 +165,10 @@ box_height = BOX_SIZE_0
 box_length = BOX_SIZE_0         # zetten zuiger terug
 v_piston = V_PISTON_0
 create_particles(particles)     # resetten deeltjes 
-for i in range(1000):
+for i in range(stepcount):
     take_time_step(particles)
     volumes[i] = box_length * box_height
-    pressures[i] = pressure
+    pressures[i] = pressure * 28 * 1.7E-27 * 1E24
     temperatures[i] = temperature(particles)
 
 fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12, 3))
@@ -211,53 +188,59 @@ plt.subplots_adjust(wspace=0.3)      # afstand tussen subplots
 plt.show()
 ```
 
-We zien inderdaad de druk, $P \propto V^{-k}$, met een exponent $k > 1$, wat verklaard wordt door de toename van de temperatuur tijdens het proces. 
+Alles alle code netjes is overgenomen, dan zien we de druk, $P \propto V^{-k}$, met een exponent $k > 1$. In het vorige notebook hebben we gezien dat dit komt doordat de zuiger arbeid verricht op het gas en de temperatuur daardoor verhoogt. 
 
 Maar wat gebeurt er wanneer we de temperatuur van het gas constant houden? Als we dat doen kunnen we controleren of de druk inderdaad invers proportioneel is met het volume, zoals de gaswet voorschrijft. 
 
 
 ## De thermostaat
 
-In de werkelijkheid is de temperatuur van de wand een mate van de amplitude van de trillingen van de deeltjes waaruit de wand bestaat.
+In de werkelijkheid is de temperatuur van de wand bepaald door de amplitude van de trillingen van de deeltjes waaruit de wand bestaat.
 De wederzijdse overdracht van de energie van die trillingen naar de kinetische energie van de gasmoleculen bepaalt het thermische contact tussen de wanden van het volume en het gas.
 In ons model bestaat de wand echter helemaal niet uit deeltjes maar hebben we een denkbeeldige lijn getrokken in de ruimte.
-We moeten daarom een wiskundige truc toepassen om de temperatuur van het gas te beïnvloeden. 
+We moeten daarom een wiskundige methode toepassen om de temperatuur van het gas te beïnvloeden. 
 
-Er zijn in de literatuur verschillende van dit soort trucs bedacht.
-Ze worden een 'thermostaat' genoemd.
+Er zijn in de literatuur verschillende van dit soort methodes bedacht.
+Zo'n methode wordt een 'thermostaat' genoemd.
 Elk van die type trucs hebben hun voor- en nadelen.
-In ons geval houden we het simpel: Op het moment dat een gasmolecuul botst met de wand (die een thermisch contact voorstelt), dan schalen we de snelheid van dit molecuul met (de wortel van) de verhouding tussen de veronderstelde temperatuur van de wand en de temperatuur die het gas op dat moment heeft:
+In ons geval houden we het simpel: Op het moment dat een gasmolecuul botst met de wand, dan schalen we de snelheid van dit molecuul met (de wortel van) de verhouding tussen de veronderstelde temperatuur van de wand en de gemiddelde temperatuur die het gas op dat moment heeft:
 
 $$
-  v = \sqrt{ \frac{T_{wand}} {T_{deeltje}} }v
+  v_{\text{na}} = \sqrt{ \frac{T_{\text{wand}}} {T_{\text{gas}}} }v_{\text{voor}}
 $$
 
 Voor het gemak houden we de linker en rechter wand van het volume als zuiger en maken we het thermische contact aan de onder- en bovenwand.
 
-```python
+
+```{exercise} code thermostaat
+:label: ex-thermostat-03
+Hieronder vind je een groot deel van de code voor de botsing van de deeltjes met de onder- en bovenwand. 
+De functie is nu gesplitst in een apart deel voor de twee wanden apart om het makkelijker te maken met de plus- en mintekens. 
+Voeg de code toe die de snelheid van het deeltje berekent ten gevolge van de thermostaat, zoals hierboven staat uitgelegd. De temperatuur van de wand is in deze functie gegeven door de variabele `set_temp`. Als deze een positieve waarde is, dan staat de thermostaat aan en moet de snelheid van de deeltjes na botsing correct worden geschaald. Als deze waarde negatief is, staat de thermostaat uit en blijft de absolute waarde van de snelheid contstant. 
+Bereken hierna ook de totale stoot (`impulse-outward`) en de warmte (`heat`). 
+Let op dat het teken van de warmte correct is. Warmte is positief als het stroomt van de omgeving naar het systeem.
+Doe dit voor beide wanden.
+```
+
+
+
+```python tags=["NB6_5"]
 def top_down_collision(particle: ParticleClass) -> None:
     """ verzorgen van botsingen met wand boven en onder, die als thermostaat kunnen werken """
     global box_height, set_temp, impulse_outward, heat
-    if abs(particle.r[1]) + particle.R > box_height / 2:
-        temp_factor = (set_temp/temperature(particles)) if set_temp > 0 else 1.0 
-        particle.r[1] = np.sign(particle.r[1]) * (box_height/2 - particle.R)
-        impulse_outward += abs(particle.momentum[1]) * (1 + temp_factor**0.5) 
-        heat += particle.kin_energy * (temp_factor - 1)
-        particle.v *= temp_factor**0.5
+    if particle.r[1] > box_height/2 - particle.R:
+        v_voor = particle.v
+        kin_voor = particle.kin_energy
+        particle.r[1] = box_height/2 - particle.R
         particle.v[1] *= -1
+        ### YOUR CODE HERE ###
+    elif particle.r[1] < -box_height/2 + particle.R:
+        v_voor = particle.v
+        kin_voor = particle.kin_energy
+        particle.r[1] = -box_height/2 + particle.R
+        particle.v[1] *= -1
+        ### YOUR CODE HERE ###
 ```
-
-```{exercise} uitleg thermostaat
-:label: ex-thermostat-03
-Leg bij elke regel na het eerste if-statement uit (in een enkele zin) waarom deze regel zo is gecodeerd. 
-Leg de regels hieronder uit, maar voeg ook comments toe in bovenstaande code. 
-```
-
-```{solution} ex-thermostat-03
-Jouw antwoord hier...
-```
-
-
 
 Met deze nieuwe definitie van de functies, draaien we een simulatie waarin we zowel de temperatuur als de druk plotten als functie van het volume.
 
@@ -271,7 +254,7 @@ Om verdere belasting van de processor tot een minimum te beperken, berekent deze
 Deze worden opgeslagen in de arrays `heats` en `works`.
 We zullen de resultaten van deze simulatie voor een aantal vervolgstappen gebruiken. 
 
-```python
+```python tags=["NB6_6"]
 particles = []
 N_steps = 5000
 volumes = np.zeros(N_steps, dtype=float)
@@ -285,7 +268,7 @@ work = 0.0
 heat = 0.0
 box_height = BOX_SIZE_0
 box_length = BOX_SIZE_0         # zetten zuiger terug
-v_piston = 0.2 * V_PISTON_0
+v_piston = V_PISTON_0
 create_particles(particles)     # resetten deeltjes 
 set_temp = temperature(particles)
 
@@ -318,8 +301,7 @@ plt.show()
 :label: ex-thermostat-04
 Maak een fit van het $(P,V)$-diagram uit de laatste simulatie.
 (Maak dus niet een nieuwe simulatie, maar gebruik de gegevens van de vorige) De fit-functie hiervoor is alvast gegeven.
-De correcte parameters die uit deze fit volgen zijn sterk afhankelijk van de constanten die je aan de start van dit werkblad gekozen hebt.
-Je moet dus actief moeten zoeken naar de juiste startwaarden voor de fit om een werkbaar antwoord te krijgen.
+We kiezen hier voor een andere fitfunctie als bij het vorige werkblad. De formule die we hier gebruiken is een vereenvoudigde versie van de formule van Van der Waals.
 Maak daarom weer gebruik van van de extra optie `p0=` in de argumenten van de functie `curve_fit`.
 ```
 
@@ -341,7 +323,7 @@ Let op het - teken!
 Waar we nog verder rekening mee moeten houden is dat een verkeerde waarde voor $n_{init}$ kan zorgen voor hele grote fouten in $a_{init}$ omdat die exponentieel mee telt.
 Omdat $p$ en $V$ fluctueren door het gering aantal deeltjes kunnen we beter waarden voor sampelen waarbij we een keuze maken moeten tussen grotere sample size voor reduceren van ruis en kleine sampele size om het effect van de zuiger klein te houden:
 
-```python
+```python tags=["NB6_7"]
 p0 = np.mean(pressures[100:110])
 p1 = np.mean(pressures[N:N+10])
 V0 = np.mean(volumes[100:110])
@@ -350,9 +332,11 @@ V1 = np.mean(volumes[N:N+10])
 n_init = -np.log(p0/p1) / np.log(V0/V1)
 a_init = p0 * V0**(-n_init)
 ```
+
 ```` 
 
-```python
+
+```python tags=["NB6_8"]
 p0 = np.mean(pressures[100:110])
 p1 = np.mean(pressures[-10:])
 V0 = np.mean(volumes[100:110])
@@ -364,27 +348,15 @@ print(n_init)
 print(a_init)
 ```
 
-```python
-def power_law(vol, a, n):
-    return a * vol**n    
+```python tags=["NB6_9"]
+def power_law(vol, a, b, n):
+    return a * (vol-b)**n    
 
 ### YOUR CODE HERE ###
 
 ```
 
-Je ziet dat de exponent van dit $(P,V)$-diagram net niet overeenkomt met de ideale verwachting. 
-
-```{exercise} afwijking
-:label: ex-thermostat-05
-Het $(P,V)$-diagram is niet perfect invers proportioneel door de verandering van de temperatuur.
-Verklaar dat de temperatuur nooit helemaal terugkeert naar de beginwaarde vanuit de dynamische beweging van de gasmoleculen. 
-```
-
-```{solution} ex-thermostat-05
-### YOUR CODE HERE ###
-```
-
-Als je goed kijkt zie je dat de temperatuur voor kleinere volumes een steeds grotere afwijking vertoont. 
+Als alles klopt, zie je dat de exponent van dit $(P,V)$-diagram heel dicht in de buurt zit van het gedrag dat je verwacht. Als je goed kijkt zie je dat de temperatuur voor kleinere volumes een steeds grotere afwijking vertoont. 
 
 ```{exercise} falende thermostaat
 :label: ex-thermostat-06
@@ -402,13 +374,18 @@ In dit geval kunnen we opnieuw controleren of de simulatie voldoet aan de eerste
 
 ```{exercise} eerste hoofdwet herhaald
 :label: ex-thermostat-07
-Maak een grafiek die zichtbaar maakt dat de simulatie inderdaad voldoet aan de eerste hoofdwet (of niet).
-Als de code hierboven klopt, zijn de tekens voor arbeid en warmte in overeenstemming met de definitie van het boek.
-Let hierbij vooral goed op je eenheden.
+De interne energie, de arbeid en de warmte (mits met de juiste voorfactoren en de juiste tekens) vormen een contstante som volgens formule 2.37 van het boek. Maak een grafiek die deze som plot als functie van het volume en laat zien dat deze inderdaad vlak is. Let hierbij vooral goed op je eenheden. Deze zijn namelijk gekozen bij het bepalen van de constanten aan het begin van dit werkblad. 
 Om het jezelf makkelijker te maken kun je de verschillende grootheden onafhankelijk van elkaar plotten en de resultaten controleren, voordat je de definitieve grafiek opstelt.  
 ```
 
-```python
+```python tags=["NB6_10"]
+plt.figure()
+plt.xlabel('Volume [nm$^{2}$]')
+plt.ylabel('Energy [J]')
+
+# maak de juiste combinatie van `temperatures`, `works`, en `heats` die contstant is. Let daarbij netjes op de eenheden. 
+# plot deze combinatie als functie van de `volumes`.
+
 ### YOUR CODE HERE ###
 ```
 
@@ -417,7 +394,7 @@ Bijzonder is dat deze beide grootheden alleen de snelheid van de moleculen beïn
 Toch zullen we in het volgende werkblad zien dat er een fundamenteel verschil zit in de werking van deze twee macroscopische grootheden. 
 
 ```{exercise}
-Push je werk naar GitHub of ga door met de uitbreiding voor een beoordeling excellent.
+Klaar? Bekijk de twee versies, kies de beste en doe een `Pull Request` naar `Main`. Je partner reviewt de code, doet eventueel suggesties. Je partner is ook degene die uiteindelijke  de Pull Request goed keurt.
 ```
 
 ```{exercise} 🌶 Uitbreiding
@@ -432,6 +409,6 @@ Als we die temperaturen verschillend maken, kunnen we kijken naar de thermische 
 - Geef de warmtegeleidingscoëfficiënt in W/K van het ideaalgas in je simulatie. (Opmerking: De warmtegeleidingscoëfficiënt wordt normaal gegeven in W/mK, maar in onze tweedimensionale simulatie valt de lengteafhankelijkheid er uit)
 ```
 
-```python
+```python tags=["NB6_11"]
 
 ```

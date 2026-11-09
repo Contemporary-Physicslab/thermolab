@@ -11,6 +11,15 @@ Je repository wordt nu aangemaakt op basis van de template-repository.
 
 Voordat je website zichtbaar is, moeten we GitHub Pages inschakelen.
 
+## GitHub pages inschakelen
+GitHub Pages inschakelen via Actions:
+
+- Ga naar 'Settings' (bovenaan in het midden van het scherm) en klik op 'Pages'. Kies in het keuzemenu onder 'Build and development' voor 'GitHub Actions' als bron.
+- Klik linksboven op 'Code' en vervolgens op het tandwielicoon (⚙, naast 'About') aan de rechterkant van de pagina. Vink het vakje 'Use your GitHub Pages website' aan.
+- Als er een GitHub Action aanwezig is (in de map `.github/workflows`), wordt de site bij elke nieuwe commit naar GitHub opnieuw opgebouwd.
+
+## Main branch beschermen
+Volg [deze stappen](https://contemporary-physicslab.github.io/FYPLC/branch-rules/) om de main branch te beschermen.
 
 
 ## Je partner uitnodigen
@@ -27,4 +36,5 @@ Voor IP2 werk je in tweetallen. Je kunt je partner(s) uitnodigen om samen aan je
 ## Partner accepteert de uitnodiging
 Je partner ontvangt een e-mail met een uitnodiging om samen aan de repository te werken. Zodra de uitnodiging is geaccepteerd, kunnen jullie beiden wijzigingen aanbrengen in de repository.
 
-Je partner volgt stappen X tot en met X, maar gebruikt de URL van **jouw** repository.
+## Lokaal werken
+Volg [deze stappen](https://contemporary-physicslab.github.io/FYPLC/startexercise/#sec-going-local) om lokaal te werken.

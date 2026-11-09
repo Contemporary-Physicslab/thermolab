@@ -1,3 +1,4 @@
+<!-- #region tags=[] -->
 # NB 3: Druk, temperatuur en energie
 
 ## Doelen
@@ -22,8 +23,9 @@ Bij het maken van deze module kun je de Feynman lectures on Physics erg goed geb
 ## Laden van alle code die we al ontwikkeld hebben
 
 Eerst roepen we de juiste pakketten van Python aan en bepalen we de waardes van de constanten van onze simulatie.
+<!-- #endregion -->
 
-```python tags=["NB3_init_1"]
+```python tags=["NB3_init"]
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -31,13 +33,15 @@ from matplotlib.animation import FuncAnimation
 BOX_SIZE_0 = 10                # Hoogte en lengte startvolume
 N = 40                         # Aantal deeltjes
 V_0 = 1                        # Startsnelheid van deeltjes
-RADIUS = 0.3 # pas aan         # Straal van moleculen
+RADIUS = 0.3                   # Straal van moleculen
 DT = 0.1 * RADIUS / V_0        # Tijdstap om geen botsing te missen
 ```
 
+<!-- #region tags=[] -->
 De klasse voor de gasmoleculen en de functies voor hun onderlinge interactie:
+<!-- #endregion -->
 
-```python tags=["NB3_init_2"]
+```python tags=["NB3_init"]
 class ParticleClass:
     def __init__(self, m, v, r, R):
         """ maakt een deeltje (constructor) """
@@ -82,9 +86,11 @@ def particle_collision(p1: ParticleClass, p2: ParticleClass):
     p2.v += 2 * m1 / (m1 + m2) * dot_product / distance_squared * delta_r
 ```
 
+<!-- #region tags=[] -->
 Het volume met de 'oude' randvoorwaarden. Dit zijn niet de randvoorwaarden van het vorige werkblad, maar de randvoorwaarden die je eerder hebt gebruikt. Hierbij botsen de deeltjes elastisch met de wanden van het volume. 
+<!-- #endregion -->
 
-```python tags=["NB3_init_3"]
+```python tags=["NB3_init"]
 def box_collision(particle: ParticleClass):
     ''' botsing met harde wanden '''
     if abs(particle.r[0]) + particle.R > BOX_SIZE_0/2: 
@@ -95,9 +101,11 @@ def box_collision(particle: ParticleClass):
         particle.r[1] = np.sign(particle.r[1]) * (BOX_SIZE_0/2 - particle.R) 
 ```
 
+<!-- #region tags=[] -->
 Het uitvoeren en samennemen van deze functies over een lijst met deeltjes:
+<!-- #endregion -->
 
-```python tags=["NB3_init_4"]
+```python tags=["NB3_init"]
 def create_particles(particles):
     """ Leegmaken en opnieuw aanmaken van deeltjes  in lijst """
     particles.clear()
@@ -132,9 +140,11 @@ def take_time_step(particles):
 
 ```
 
+<!-- #region tags=[] -->
 Laten we controleren of de deeltjes gemaakt zijn en of ze allemaal een snelheid hebben:
+<!-- #endregion -->
 
-```python
+```python tags=[]
 particles = []
 create_particles(particles)
 
@@ -152,8 +162,9 @@ plt.plot(particles[0].r[0],particles[0].r[1], 'r.', ms=25)
 plt.show()
 ```
 
+<!-- #region tags=[] -->
 We hebben het eerste deeltje rood gemaakt zodat je daadwerkelijk kunt zien dat deze beweegt.
-
+<!-- #endregion -->
 
 ## Het draaien van een eerste simulatie ter controle
 
@@ -213,11 +224,13 @@ def temperature(particles) -> float:
     return temp
 ```
 
+<!-- #region tags=[] -->
 ```{exercise} Temperatuurplot
 :label: ex-druktemp-2
 
 Gebruik deze functie om een simulatie te maken waarin je de temperatuur als functie van de tijdstap voor 100 tijdstappen plot.
 ```
+<!-- #endregion -->
 
 ```python tags=["NB3_check_const_temp"]
 # ruimte voor uitwerking
@@ -240,6 +253,7 @@ plt.ylabel('Temperature')
 plt.show()
 ```
 
+<!-- #region tags=[] -->
 ```{exercise}
 :label: ex-druktemp-3
 
@@ -247,7 +261,7 @@ De assen moeten natuurlijk ook eenheden hebben.
 In een vorige module heb je de vermenigvuldigingsfactoren en eenheden bij de constanten van deze simulatie bepaald.
 - Breid de berekening uit, zodat de eenheden kloppen bij het model dat we probeerden weer te geven.
 ```
-
+<!-- #endregion -->
 
 ## Druk
 
@@ -284,7 +298,7 @@ Let op het gebruik van variabelen en het gebied waarbinnen ze gelden (genaamd 's
 Programmeurs proberen het aantal globale variabelen te reduceren tot een minimum. Bij grote programma's wordt het aantal variabelen namelijk snel onoverzichtelijk. We komen hier in een later werkblad op terug. 
 ```
 
-```python
+```python tags=["NB3_init_ex4"]
 impulse_outward = 0.0
 pressure = 0.0
 
@@ -313,6 +327,7 @@ def handle_walls(particles):
 
 ```
 
+<!-- #region tags=[] -->
 ```{exercise}
 :label: ex-druktemp-4
 Maak nu een simulatie waarin je de druk als functie van de tijd toont gedurende 100 tijdstappen.
@@ -322,6 +337,7 @@ Wat zou je als verklaring hiervoor geven?
 ```
 
 
+<!-- #endregion -->
 
 ```python tags=["NB3_plot_pres"]
 particles = []
@@ -340,6 +356,7 @@ plt.show()
 
 ```
 
+<!-- #region tags=[] -->
 ## Verbeteren van code: middelen
 
 De grafiek voor de druk bestaat uit een achtergrond op de waarde 0 en daarop een serie scherpe pieken.
@@ -353,8 +370,9 @@ Probeer bovenstaande simulatie uit te voeren met 400 deeltjes, vergeet niet je v
 Klaar?
 Zet je initiële waarden weer terug.
 ```
+<!-- #endregion -->
 
-```python
+```python tags=[]
 ### YOUR CODE HERE ###
 
 ```

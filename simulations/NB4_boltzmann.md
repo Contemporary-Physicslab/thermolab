@@ -1,3 +1,4 @@
+<!-- #region tags=[] -->
 #  NB 4: De Maxwell-Boltzmann snelheidsverdeling
 
 ## Doelen
@@ -12,13 +13,13 @@ Daarna voegen we de code toe voor het bekijken van de dynamiek van de deeltjes:
 - We bepalen de kansverdeling van de snelheden van de deeltjes
 
 Zie voor de verdere inhoudelijke achtergrond de [Feynman lectures on Physics](https://www.feynmanlectures.caltech.edu/I_40.html).
-
+<!-- #endregion -->
 
 ## Laden van eerdere code
 
 Eerst nemen we de pakketten van Python en de constanten voor de simulatie over. 
 
-```python tags = ["NB4_init_1"]
+```python tags=["NB4_init_1"]
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -27,13 +28,13 @@ from scipy.optimize import curve_fit
 BOX_SIZE_0 = 10                # Hoogte en lengte startvolume
 N = 40                         # Aantal deeltjes
 V_0 = 1                        # Startsnelheid van deeltjes
-RADIUS = 0.3 # pas aan         # Straal van moleculen
+RADIUS = 0.3                   # Straal van moleculen
 DT = 0.1 * RADIUS / V_0        # Tijdstap om geen botsing te missen
 ```
 
 Dan maken we weer gebruik van de klasse voor het deeltje:
 
-```python tags = ["NB4_init_2"]
+```python tags=["NB4_init_2"]
 class ParticleClass:
     def __init__(self, m, v, r, R):
         """ maakt een deeltje (constructor) """
@@ -76,7 +77,7 @@ def particle_collision(p1: ParticleClass, p2: ParticleClass):
 
 En we laten de deeltjes met de wanden botsen, zodat er sprake is van een druk en een temperatuur in een gesloten volume.
 
-```python tags = ["NB4_init_3"]
+```python tags=["NB4_init_3"]
 def box_collision(particle: ParticleClass):
     ''' botsing met harde wanden '''
     if abs(particle.r[0]) + particle.R > BOX_SIZE_0/2: 
@@ -91,7 +92,7 @@ def box_collision(particle: ParticleClass):
 
 Waarbij we al deze functies uitvoeren en samennemen over een lijst met deeltjes:
 
-```python tags = ["NB4_init_4"]
+```python tags=["NB4_init_4"]
 def create_particles(particles):
     """ Leegmaken en opnieuw aanmaken van deeltjes  in lijst """
     particles.clear()
@@ -126,7 +127,7 @@ def take_time_step(particles):
 
 Zoals we inmiddels gewend zijn draaien we eerst een korte simulatie om te verifiëren of alle code correct is overgenomen:
 
-```python
+```python tags=[]
 particles = []
 create_particles(particles)
 for i in range(100):
@@ -172,18 +173,24 @@ Creëer `N` deeltjes met deze functie en plot hiervan de kinetische energie in d
 
 ```python tags=["NB4_numsteps"]
 # Jouw antwoord
-num_steps = 
+
+#def calculate_num_steps():
+#    return ...
+
 ### YOUR CODE HERE ###
 ```
 
+<!-- #region tags=[] -->
 Aan het resultaat van je simulatie kan je zien dat de deeltjes zich inderdaad gedragen volgens equipartitiebeginsel. Afwijkingen van het gemiddelde zijn het gevolg van de statistiek en worden voor grotere aantallen deeltjes relatief kleiner. 
+<!-- #endregion -->
 
-
+<!-- #region tags=[] -->
 ## De snelheidsverdeling
 
 In het vorige werkblad hebben we al gezien dat er een relatie is tussen de snelheid van de deeltjes en de temperatuur. Je kan hierdoor al vermoeden dat de snelheid van de deeltjes wordt gegeven door een verdeling die van de temperatuur afhangt. De vraag is dus of we deze functie kunnen vinden.  
 
 Om de snelheidsverdeling van de deeltjes te bepalen kan je gebruik maken van de functie histogram van python. Laten we daarom een simulatie draaien waarin we vanuit een willekeurige beginsituatie 100 tijdstappen zetten en daarna de snelheidsverdeling plotten:
+<!-- #endregion -->
 
 ```python
 particles = []
@@ -360,7 +367,7 @@ for i in range(5000):
 norm_counts = tot_counts / 20
 
 def maxwell2d(v,a):
-# your code here
+### YOUR CODE HERE ###
 ```
 
 ```{exercise}
@@ -379,6 +386,6 @@ We kunnen deze opdracht makkelijk uitbreiden door de deeltjes van verschillende 
 - Bedenk zelf een interessante uitbreiding.
 ```
 
-```python
+```python tags=["NB4_excellent"]
 
 ```
