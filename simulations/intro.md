@@ -42,7 +42,8 @@ Wil je zien wat de ander doet, dan moet je de branch die online staat lokaal bes
 In het dictaat van [Python for physicists](https://contemporary-physicslab.github.io/FYPLC/) hebben we hoofdstukken toegevoegd over het werken met Git en Pixi. Zeker de hoofdstukken over Git dienen gelezen te worden om goed te kunnen werken in deze periode.
 
 ## Mystmd preview
+Je kunt je gehele werk zien door de volgende code te runnen `pixi run preview`.
+
 
 ## Run editor
-
-# nog doen
+De editor kun je openen door de volgende code te runnen: `pixi run editor`.

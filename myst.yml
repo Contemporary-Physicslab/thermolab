@@ -20,6 +20,11 @@ project:
     - file: simulations/NB2_brownianmotion.md
     - file: simulations/NB3_druktemp.md
     - file: simulations/NB4_boltzmann.md
+    - file: simulations/NB5_arbeid.md
+    - file: simulations/NB6_thermostaat.md
+    - file: simulations/NB7_cycli.md
+    - file: simulations/NB8_entropie.md
+    - file: simulations/NB9_zonnecel.md
     - title: Appendix
       children:
       - file: codechecks.md

@@ -1,4 +1,4 @@
-# NB 8: Cycli 
+# NB 7: Cycli 
 
 
 In de vorige werkbladen heb je gezien hoe een gas zich gedraagt als het controlevolume wordt aangepast. Daarbij kan er arbeid worden uitgevoerd of warmte stromen. Door deze processen te combineren kunnen we ook thermodynamische processen in een zuiger simuleren. We gaan kijken of die voldoen aan de theorie uit het boek en waar deze afwijken. 
@@ -480,7 +480,6 @@ ax2.plot(volumes[volumes>0], temperatures[volumes>0], '-b')
 plt.subplots_adjust(wspace=0.3)   
 plt.show()
 
-###end-solution
 ```
 
 Als je de fases van het proces goed hebt doorlopen, dan bevat de variabele `work` nu de totale arbeid die tijdens het proces is verricht, `hi_heat` de warmteoverdracht aan de warme wand en `lo_heat` de warmteoverdracht aan de koude wand.
