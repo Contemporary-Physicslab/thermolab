@@ -3,14 +3,13 @@
 
 
 ## Instructies voor de repository-eigenaar
-1. Ga naar de [repository](https://github.com/Contemporary-Physicslab/gitintro)
+1. Ga naar de [repository](https://github.com/Contemporary-Physicslab/thermolab)
 1. Klik op de groene knop `Use this template` en kies `Create a new repository`
 1. Kies een goede naam voor je repository – deze wordt ook onderdeel van de URL! Wijzig de overige instellingen niet en klik op `Create repository`.
 
 Je repository wordt nu aangemaakt op basis van de template-repository.
 
 Voordat je website zichtbaar is, moeten we GitHub Pages inschakelen.
-
 
 
 
