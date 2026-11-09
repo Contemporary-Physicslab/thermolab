@@ -6,10 +6,10 @@ project:
   # description:
   # keywords: []
   authors: 
-    - name: Freek Pols
-    - name: Roel Smit
+    - name: Jesse Jansen
+    - name: Finn Ansing 
 
-  github: https://github.com/Contemporary-Physicslab/thermolab
+  github: https://github.com/IP2iksnaperniksvan/thermolab
   plugins:
     - https://github.com/jupyter-book/myst-plugins/releases/download/page-last-updatedv1.1/page-last-updated.mjs
   toc:
