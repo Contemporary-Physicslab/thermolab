@@ -520,79 +520,7 @@ Je ziet dat de druk een statistisch bepaalde grootheid is die met de tijd variee
 
 ```python
 
-def meet_druk(N_nieuw, aantal_stappen=20000):
-    global N, pressure
 
-    N = N_nieuw
-    pressure = 0.0
-
-    particles = []
-    create_particles(particles)
-
-    drukken = np.zeros(aantal_stappen)
-
-    for i in range(aantal_stappen):
-        take_time_step(particles)
-        drukken[i] = pressure
-
-    return drukken
-
-
-# Simulaties voor N = 40 en N = 80
-druk_40 = meet_druk(40)
-druk_80 = meet_druk(80)
-
-# Eerste 2000 stappen weglaten (opstartfase)
-druk_40 = druk_40[2000:]
-druk_80 = druk_80[2000:]
-
-# Gemiddelde en standaardafwijking
-gem_40 = np.mean(druk_40)
-gem_80 = np.mean(druk_80)
-
-std_40 = np.std(druk_40)
-std_80 = np.std(druk_80)
-
-# Relatieve fluctuaties
-rel_40 = std_40 / gem_40
-rel_80 = std_80 / gem_80
-
-print("N = 40")
-print("Gemiddelde druk:", gem_40)
-print("Standaardafwijking:", std_40)
-print("Relatieve fluctuatie:", rel_40)
-
-print("\nN = 80")
-print("Gemiddelde druk:", gem_80)
-print("Standaardafwijking:", std_80)
-print("Relatieve fluctuatie:", rel_80)
-
-# Histogrammen van de relatieve druk
-plt.figure(figsize=(9, 5))
-
-plt.hist(druk_40 / gem_40, bins=40,
-         density=True, alpha=0.5, label="N = 40")
-plt.hist(druk_80 / gem_80, bins=40,
-         density=True, alpha=0.5, label="N = 80")
-
-plt.xlabel("Druk / gemiddelde druk")
-plt.ylabel("Kansdichtheid")
-plt.title("Statistische fluctuaties van de druk")
-plt.legend()
-plt.show()
-
-# Vergelijking van de fluctuaties
-print("\nVerhouding relatieve fluctuaties:",  rel_80 / rel_40)
-
-# Extrapolatie naar 10^23 deeltjes
-N_groot = 1e23
-
-rel_groot = rel_40 * np.sqrt(40 / N_groot)
-
-print("Geschatte relatieve fluctuatie bij 10^23 deeltjes:",  rel_groot)
-
-# Oorspronkelijke waarde herstellen
-N = 40
 
 ```
 

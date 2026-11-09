@@ -62,7 +62,7 @@ met $\sigma = \text{constante van Stefan–Boltzmann} = 5.670 \cdot 10^{-8}\ \ma
 Integralen kunnen we benaderen met een zogenaamde Riemann som.
 Dit is geïllustreerd in onderstaande figuur (voor een andere functie dan de Planck-kromme).
 
-```{figure} ../figuresRiemann_sum.gif
+```{figure} ../figures/Riemann_sum.gif
 :width: 50%
 :label: fig_Riemann
 
