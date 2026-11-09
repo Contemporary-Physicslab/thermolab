@@ -1,4 +1,3 @@
-<!-- #region tags=[] -->
 #  NB 4: De Maxwell-Boltzmann snelheidsverdeling
 
 ## Doelen

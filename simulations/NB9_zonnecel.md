@@ -37,7 +37,7 @@ met:
 Onderstaande figuur laat zien hoe de verdeling van de stralingsenergie over de golflengtes afhangt van de temperatuur van de straler.
 We zien dat de zon (in goede benadering een zwarte straler met een temperatuur van $6000 \; \mathrm{K}$) de meeste stralingsenergie uitzendt bij zichtbaar licht golflengtes ($400-800 \; \mathrm{nm}$).
 
-```{figure} https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/BlackbodySpectrum_loglog_150dpi_en.png/1280px-BlackbodySpectrum_loglog_150dpi_en.png
+```{figure} ../figures/BlackbodySpectrum.png
 :width: 50%
 :label: fig_planckkromme
 
@@ -62,7 +62,7 @@ met $\sigma = \text{constante van Stefan–Boltzmann} = 5.670 \cdot 10^{-8}\ \ma
 Integralen kunnen we benaderen met een zogenaamde Riemann som.
 Dit is geïllustreerd in onderstaande figuur (voor een andere functie dan de Planck-kromme).
 
-```{figure} https://upload.wikimedia.org/wikipedia/commons/1/19/Riemann_sum_%28leftbox%29.gif
+```{figure} ../figuresRiemann_sum.gif
 :width: 50%
 :label: fig_Riemann
 

@@ -1,4 +1,3 @@
-<!-- #region tags=[] -->
 # NB 3: Druk, temperatuur en energie
 
 ## Doelen
