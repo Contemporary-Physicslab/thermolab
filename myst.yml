@@ -7,7 +7,7 @@ project:
   # keywords: []
   authors: 
     - name: Jesse Jansen
-    - name: Dean Shalhav
+    - name: Dean Shalhav!
 
   github: https://github.com/StudentJesse/IP2Thermo
   plugins:
