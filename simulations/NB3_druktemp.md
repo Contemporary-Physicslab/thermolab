@@ -1,5 +1,9 @@
 # NB 3: Druk, temperatuur en energie
 
+```{warning}
+Vergeet niet naar main te gaan, te pullen, een nieuwe branch te maken vanaf main en daarin verder te werken!
+```
+
 ## Doelen
 
 Om het gedrag van een gas beter te begrijpen moeten we de microscopische eigenschappen van ons model (zoals massa, snelheid, impuls en energie per deeltje) nu verbinden aan de macroscopische eigenschappen van het systeem (zoals druk en temperatuur). We gaan ons model dus uitbreiden met code om deze macroscopische eigenschappen te berekenen.

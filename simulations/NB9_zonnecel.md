@@ -1,4 +1,7 @@
 # NB 9: Fotovoltaïsche Zonnecel
+```{warning}
+Vergeet niet naar main te gaan, te pullen, een nieuwe branch te maken vanaf main en daarin verder te werken!
+```
 
 ## Inleiding
 De werking van een fotovoltaïsche zonnecel is gebaseerd op de interactie tussen fotonen (met een bepaalde energie $E_p$) en de vrije elektronen in een halfgeleidermateriaal.

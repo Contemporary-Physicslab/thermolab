@@ -1,5 +1,9 @@
 #  NB 4: De Maxwell-Boltzmann snelheidsverdeling
 
+```{warning}
+Vergeet niet naar main te gaan, te pullen, een nieuwe branch te maken vanaf main en daarin verder te werken!
+```
+
 ## Doelen
 We hebben al gezien in het vorige werkblad dat de snelheid van de deeltjes en de temperatuur aan elkaar gerelateerd zijn. In dit werkblad gaan we dat verder bekijken.
 

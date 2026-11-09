@@ -5,6 +5,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
+```{warning}
+Vergeet niet naar main te gaan, te pullen, een nieuwe branch te maken vanaf main en daarin verder te werken!
+```
+
+
 ## Recap en uitbreiding
 
 Je hebt al gezien hoe je een botsend deeltjesmodel maakt. Je startte toen met 1 of 2 deeltjes en kan dit uitbreiden naar ~100 deeltjes. Daarbij is het logisch om gebruik te maken van classes.

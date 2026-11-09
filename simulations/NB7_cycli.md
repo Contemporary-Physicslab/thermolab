@@ -1,5 +1,8 @@
 # NB 7: Cycli 
 
+```{warning}
+Vergeet niet naar main te gaan, te pullen, een nieuwe branch te maken vanaf main en daarin verder te werken!
+```
 
 In de vorige werkbladen heb je gezien hoe een gas zich gedraagt als het controlevolume wordt aangepast. Daarbij kan er arbeid worden uitgevoerd of warmte stromen. Door deze processen te combineren kunnen we ook thermodynamische processen in een zuiger simuleren. We gaan kijken of die voldoen aan de theorie uit het boek en waar deze afwijken. 
 
@@ -411,7 +414,7 @@ Klaar? Bekijk de twee branches, kies de beste en doe een `Pull Request` naar `Ma
 ```
 
 
-# De Carnot-cyclus (uitbreiding 🌶) 
+## De Carnot-cyclus (uitbreiding 🌶) 
 
 Nu dat we een volledige cyclus met de wamrtepomp hebben gemaakt is het interessant om te zien of we ook de efficiëntie van de pomp kunnen verhogen. Zoals vermeld in het theorie boek is de meest efficiënte cyclus de Carnot-cyclus. 
 

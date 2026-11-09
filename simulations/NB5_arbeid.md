@@ -1,5 +1,9 @@
 # NB 5: Arbeid
 
+```{warning}
+Vergeet niet naar main te gaan, te pullen, een nieuwe branch te maken vanaf main en daarin verder te werken!
+```
+
 ## Doelen
 
 Nu we de microscopische grootheden van de moleculen hebben verbonden aan de macroscopische grootheden van het gas kunnen we de thermodynamica van het gas echt bestuderen met onze simulatie. In dit werkblad kijken we hoe de temperatuur en de druk veranderen onder invloed van een zuiger die het volume verandert. 

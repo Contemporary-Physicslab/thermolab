@@ -1,5 +1,8 @@
 # NB 8: Entropie 🌶
 
+```{warning}
+Vergeet niet naar main te gaan, te pullen, een nieuwe branch te maken vanaf main en daarin verder te werken!
+```
 
 ## Doelen
 
