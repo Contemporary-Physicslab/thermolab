@@ -9,7 +9,7 @@ project:
     - name: Jesse Jansen
     - name: Dean Shalhav
 
-  github: https://StudentJesse/IP2Thermo
+  github: https://github.com/StudentJesse/IP2Thermo
   plugins:
     - https://github.com/jupyter-book/myst-plugins/releases/download/page-last-updatedv1.1/page-last-updated.mjs
   toc:
