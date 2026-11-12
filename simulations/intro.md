@@ -1,3 +1,19 @@
+---
+jupyter:
+  jupytext:
+    cell_metadata_filter: -all
+    custom_cell_magics: kql
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.3'
+      jupytext_version: 1.11.2
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
 (ch_introductie)=
 # Introductie
 
@@ -47,3 +63,11 @@ Je kunt je gehele werk zien door de volgende code te runnen `pixi run preview`.
 
 ## Run editor
 De editor kun je openen door de volgende code te runnen: `pixi run editor`.
+
+```python
+import numpy as np
+```
+
+```python
+
+```

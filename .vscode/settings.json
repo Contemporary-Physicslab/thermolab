@@ -1,0 +1,5 @@
+{
+    "python-envs.defaultEnvManager": "ms-python.python:system",
+    "python.defaultInterpreterPath": "C:\\Users\\jesse\\Documents\\TN\\Eerstejaars\\IP2Thermo\\.pixi\\envs\\default\\python.exe",
+    "jupyter.interactiveWindow.textEditor.executeSelection": true
+}
