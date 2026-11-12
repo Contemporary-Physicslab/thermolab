@@ -10,13 +10,18 @@ editor = "jupyter lab"
 preview = "myst start"
 push = { cmd = 'git add . && git commit -m "{{ message }}" && git push', args = ["message"] }
 pull = 'git pull'
-
+hello = "python -c 'print(\"Hello from Pixi!\")'"
 
 [dependencies]
 numpy = ">=2.5.3,<3"
 matplotlib = ">=3.11.2,<4"
 scipy = ">=1.18.1,<2"
 jupyterlab-git = ">=0.55.0,<0.56"
+python = ">=3.14.10,<3.15"
+jupyterlab = ">=4.6.6,<5"
+jupyterlab-myst = ">=2.7.0,<3"
+jupytext = ">=1.19.6,<2"
+mystmd = ">=1.12.0,<2"
 
 
 [feature.development.pypi-dependencies]
@@ -30,3 +35,4 @@ jupytext = ">=1.19.5,<2"
 [environments]
 ci = []
 default = { features = ["development"] }
+
